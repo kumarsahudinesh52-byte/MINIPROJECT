@@ -1,0 +1,56 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <h3>Create a New Listing</h3>
+    <div class="row">
+    <div class="col-8 offset-2" >
+        <!--encypt use for upload files -->
+        <!--As upload files can not be readed by urlencoded-->
+    <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data"> 
+        <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input name="listing[title]" placeholder="Enter title" type="text" class="form-control" required/>
+        <div class="valid-feedback">Accepcted</div>
+        <div class="invalid-feedback">Input valid title</div>
+        </div>
+        <div class="mb-3">
+        <label for="text" class="form-label">TextContent</label>
+        <textarea name="listing[description]" placeholder="Enter description" class="form-control" required></textarea>
+        <div class="valid-feedback">Accepcted</div>
+        <div class="invalid-feedback">Input valid description</div>
+        </div>
+        <!--Now we upload files-->
+        <!-- <div class="mb-3">
+        <label for="image" class="form-label">Iamge</label>
+        <input name="listing[image]" placeholder="enter image URL/Link" type="text" class="form-control">
+        </div> -->
+        <div class="mb-3">
+        <label for="image" class="form-label">Upload Iamge</label>
+        <input name="listing[image]" placeholder="enter image URL/Link" type="file" class="form-control"  required>
+        </div>
+    <div class="row">
+            <div class="mb-3 col-md-4">
+            <label for="price" class="form-label">Price</label>
+            <input name="listing[price]" placeholder="12000"  class="form-control" required>
+            <div class="valid-feedback">Accepcted</div>
+            <div class="invalid-feedback">Input valid price</div>
+            </div>
+            <div class="mb-3 col-md-8">
+            <label for="country" class="form-label">Country</label>
+            <input name="listing[country]" placeholder="India" type="text" class="form-control" required>
+            <div class="valid-feedback">Accepcted</div>
+            <div class="invalid-feedback">Input valid country</div>
+            </div>
+    </div>
+        <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input name="listing[location]" placeholder="Jiapur,Rajasthan" type="text" class="form-control" required>
+        <div class="valid-feedback">Accepcted</div>
+        <div class="invalid-feedback">Input valid location</div>
+        </div>
+        <br> <br>
+        <button class="btn btn-dark add-btn">ADD</button>
+    </form>
+</body>
+</html>
+</div>
+</div>
