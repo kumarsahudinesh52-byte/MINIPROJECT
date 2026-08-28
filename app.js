@@ -105,9 +105,9 @@ app.use((req,res,next) => {
 
 
 //Now we not need the home route otherwise anyone get to this route 
-// app.get("/", (req,res) => {
-//     res.send("Hi, I am root");
-// })
+app.get("/", (req,res) => {
+    res.redirect("/listings");
+})
 
 const ExpressError = require("./util/ExpressError.js")
 
