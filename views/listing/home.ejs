@@ -1,0 +1,967 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #fff;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    .home-navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: white;
+        border-bottom: 1px solid #eee;
+        padding: 12px 5%;
+    }
+
+    .home-brand {
+        font-size: 28px;
+        font-weight: 700;
+        color: #ff385c;
+        text-decoration: none;
+    }
+
+    .home-brand:hover {
+        color: #e31c5f;
+    }
+
+    .home-nav-link {
+        color: #333 !important;
+        font-weight: 500;
+        margin: 0 8px;
+    }
+
+    .home-nav-link:hover {
+        color: #ff385c !important;
+    }
+
+    .home-search {
+        border: 1px solid #ddd;
+        border-radius: 30px;
+        padding: 6px;
+        background: white;
+    }
+
+    .home-search input {
+        border: none;
+        outline: none;
+        padding: 8px 15px;
+        width: 180px;
+    }
+
+    .home-search button {
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        background: #ff385c;
+        color: white;
+    }
+
+    /* ================= DISCOUNT BANNER ================= */
+
+    .discount-banner {
+        background: linear-gradient(90deg, #ff385c, #ff6b81);
+        color: white;
+        padding: 12px;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .discount-banner span {
+        background: white;
+        color: #ff385c;
+        padding: 5px 12px;
+        border-radius: 20px;
+        margin-left: 10px;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero-section {
+        height: 600px;
+        position: relative;
+        background:
+            linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
+            url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1800&q=80");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero-content {
+        color: white;
+        max-width: 850px;
+        padding: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 60px;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+
+    .hero-content p {
+        font-size: 22px;
+        margin-bottom: 30px;
+    }
+
+    .hero-search {
+        background: white;
+        padding: 8px;
+        border-radius: 50px;
+        display: flex;
+        max-width: 650px;
+        margin: auto;
+    }
+
+    .hero-search input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 15px 20px;
+        border-radius: 50px;
+        font-size: 16px;
+    }
+
+    .hero-search button {
+        border: none;
+        background: #ff385c;
+        color: white;
+        border-radius: 40px;
+        padding: 0 28px;
+        font-weight: 600;
+    }
+
+    /* ================= SECTION ================= */
+
+    .home-section {
+        padding: 55px 5%;
+    }
+
+    .home-section h2 {
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+        color: #777;
+        margin-bottom: 30px;
+    }
+
+    /* ================= MOVING CARDS ================= */
+
+    .slider-wrapper {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .moving-cards {
+        display: flex;
+        gap: 22px;
+        width: max-content;
+        animation: moveCards 28s linear infinite;
+    }
+
+    .moving-cards:hover {
+        animation-play-state: paused;
+    }
+
+    @keyframes moveCards {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    .destination-card {
+        width: 270px;
+        flex-shrink: 0;
+        border-radius: 18px;
+        overflow: hidden;
+        position: relative;
+        height: 330px;
+        cursor: pointer;
+        box-shadow: 0 5px 18px rgba(0,0,0,.12);
+    }
+
+    .destination-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: .4s;
+    }
+
+    .destination-card:hover img {
+        transform: scale(1.08);
+    }
+
+    .destination-info {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 25px 18px 18px;
+        color: white;
+        background: linear-gradient(transparent, rgba(0,0,0,.8));
+    }
+
+    .destination-info h4 {
+        margin: 0;
+        font-weight: 700;
+    }
+
+    .destination-info p {
+        margin: 5px 0 0;
+    }
+
+    /* ================= DEAL CARDS ================= */
+
+    .deal-card {
+        border: none;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 4px 18px rgba(0,0,0,.1);
+        transition: .3s;
+        height: 100%;
+    }
+
+    .deal-card:hover {
+        transform: translateY(-7px);
+    }
+
+    .deal-card img {
+        height: 220px;
+        object-fit: cover;
+    }
+
+    .deal-body {
+        padding: 20px;
+    }
+
+    .discount-tag {
+        display: inline-block;
+        background: #ff385c;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .old-price {
+        text-decoration: line-through;
+        color: #888;
+    }
+
+    .new-price {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    /* ================= CATEGORIES ================= */
+
+    .category-box {
+        text-decoration: none;
+        color: #222;
+        text-align: center;
+        padding: 25px 10px;
+        border: 1px solid #eee;
+        border-radius: 18px;
+        transition: .3s;
+        display: block;
+    }
+
+    .category-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 18px rgba(0,0,0,.1);
+        color: #ff385c;
+    }
+
+    .category-box i {
+        font-size: 32px;
+        margin-bottom: 12px;
+    }
+
+    .category-box h5 {
+        margin: 0;
+    }
+
+    /* ================= BIG OFFER ================= */
+
+    .big-offer {
+        margin: 30px 5%;
+        min-height: 350px;
+        border-radius: 25px;
+        background:
+            linear-gradient(90deg, rgba(0,0,0,.75), rgba(0,0,0,.15)),
+            url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        padding: 50px;
+        color: white;
+    }
+
+    .big-offer-content {
+        max-width: 500px;
+    }
+
+    .big-offer h2 {
+        font-size: 45px;
+        font-weight: 800;
+    }
+
+    .offer-btn {
+        display: inline-block;
+        background: #ff385c;
+        color: white;
+        padding: 13px 25px;
+        border-radius: 30px;
+        text-decoration: none;
+        margin-top: 15px;
+        font-weight: 600;
+    }
+
+    /* ================= FOOTER ================= */
+
+    .home-footer {
+        background: #f7f7f7;
+        padding: 50px 5% 25px;
+        margin-top: 50px;
+    }
+
+    .footer-title {
+        font-weight: 700;
+        margin-bottom: 18px;
+    }
+
+    .home-footer a {
+        display: block;
+        text-decoration: none;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .home-footer a:hover {
+        color: #ff385c;
+    }
+
+    .footer-bottom {
+        border-top: 1px solid #ddd;
+        margin-top: 30px;
+        padding-top: 20px;
+        text-align: center;
+        color: #777;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 768px) {
+
+        .hero-content h1 {
+            font-size: 40px;
+        }
+
+        .hero-content p {
+            font-size: 17px;
+        }
+
+        .hero-section {
+            height: 520px;
+        }
+
+        .home-search {
+            display: none;
+        }
+
+        .big-offer {
+            padding: 35px;
+        }
+
+        .big-offer h2 {
+            font-size: 32px;
+        }
+    }
+</style>
+
+
+<!-- ================================================= -->
+<!-- NAVBAR -->
+<!-- ================================================= -->
+
+<nav class="navbar navbar-expand-lg home-navbar">
+
+    <div class="container-fluid">
+
+        <a class="home-brand" href="/">
+            <i class="fa-solid fa-compass"></i>
+            Wanderlust
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#homeNavbar">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="homeNavbar">
+
+            <ul class="navbar-nav me-auto ms-4">
+
+                <li class="nav-item">
+                    <a class="nav-link home-nav-link" href="/">
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link home-nav-link" href="/listings">
+                        Explore
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link home-nav-link" href="/listings/Trending">
+                        Trending
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link home-nav-link" href="/listings/Mountains">
+                        Mountains
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link home-nav-link" href="/listings/Rooms">
+                        Rooms
+                    </a>
+                </li>
+
+            </ul>
+
+
+            <form
+                class="home-search d-flex me-3"
+                action="/listings/search"
+                method="GET">
+
+                <input
+                    type="search"
+                    name="q"
+                    placeholder="Search destination">
+
+                <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
+            </form>
+
+
+            <div class="d-flex gap-2">
+
+                <a href="/login" class="btn btn-outline-dark">
+                    Login
+                </a>
+
+                <a href="/signup" class="btn btn-dark">
+                    Sign Up
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- ================================================= -->
+<!-- DISCOUNT BANNER -->
+<!-- ================================================= -->
+
+<div class="discount-banner">
+
+    🎉 Special Summer Offer!
+    Get up to <strong>30% OFF</strong> on selected stays
+
+    <span>
+        USE CODE: WANDER30
+    </span>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- HERO -->
+<!-- ================================================= -->
+
+<section class="hero-section">
+
+    <div class="hero-content">
+
+        <h1>Travel. Explore. Repeat.</h1>
+
+        <p>
+            Discover beautiful places and unforgettable stays
+            around the world.
+        </p>
+
+        <form
+            class="hero-search"
+            action="/listings/search"
+            method="GET">
+
+            <input
+                type="search"
+                name="q"
+                placeholder="Where do you want to go?">
+
+            <button type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- MOVING DESTINATIONS -->
+<!-- ================================================= -->
+
+<section class="home-section">
+
+    <h2>🔥 Trending destinations</h2>
+
+    <p class="section-subtitle">
+        Places everyone is talking about right now
+    </p>
+
+    <div class="slider-wrapper">
+
+        <div class="moving-cards">
+
+            <div class="destination-card">
+
+                <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80">
+
+                <div class="destination-info">
+                    <h4>India</h4>
+                    <p>Beautiful experiences</p>
+                </div>
+
+            </div>
+
+
+            <div class="destination-card">
+
+                <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80">
+
+                <div class="destination-info">
+                    <h4>Goa</h4>
+                    <p>Beachside stays</p>
+                </div>
+
+            </div>
+
+
+            <div class="destination-card">
+
+                <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80">
+
+                <div class="destination-info">
+                    <h4>Maldives</h4>
+                    <p>Luxury island stays</p>
+                </div>
+
+            </div>
+
+
+            <div class="destination-card">
+
+                <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80">
+
+                <div class="destination-info">
+                    <h4>Jaipur</h4>
+                    <p>Royal experiences</p>
+                </div>
+
+            </div>
+
+
+            <div class="destination-card">
+
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80">
+
+                <div class="destination-info">
+                    <h4>Manali</h4>
+                    <p>Mountain adventures</p>
+                </div>
+
+            </div>
+
+
+            <div class="destination-card">
+
+                <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=800&q=80">
+
+                <div class="destination-info">
+                    <h4>Europe</h4>
+                    <p>Explore something new</p>
+                </div>
+
+            </div>
+
+
+            <!-- DUPLICATE CARDS FOR CONTINUOUS ANIMATION -->
+
+            <div class="destination-card">
+
+                <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80">
+
+                <div class="destination-info">
+                    <h4>India</h4>
+                    <p>Beautiful experiences</p>
+                </div>
+
+            </div>
+
+
+            <div class="destination-card">
+
+                <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80">
+
+                <div class="destination-info">
+                    <h4>Goa</h4>
+                    <p>Beachside stays</p>
+                </div>
+
+            </div>
+
+
+            <div class="destination-card">
+
+                <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80">
+
+                <div class="destination-info">
+                    <h4>Maldives</h4>
+                    <p>Luxury island stays</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- DEALS -->
+<!-- ================================================= -->
+
+<section class="home-section">
+
+    <h2>🏷️ Deals you don't want to miss</h2>
+
+    <p class="section-subtitle">
+        Save more on your next adventure
+    </p>
+
+    <div class="row g-4">
+
+        <% if (allListings && allListings.length > 0) { %>
+
+            <% allListings.slice(0, 3).forEach((listing, index) => { %>
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="deal-card">
+
+                        <!-- IMAGE -->
+                        <img
+                            src="<%= listing.image.url %>"
+                            class="w-100"
+                            alt="<%= listing.title %>"
+                        >
+
+                        <div class="deal-body">
+
+                            <!-- DISCOUNT -->
+                            <span class="discount-tag">
+                                <%= [30, 25, 20][index] %>% OFF
+                            </span>
+
+                            <!-- TITLE -->
+                            <h4>
+                                <%= listing.title %>
+                            </h4>
+
+                            <!-- DESCRIPTION -->
+                            <p class="text-muted">
+                                <%= listing.description %>
+                            </p>
+
+                            <!-- PRICE -->
+                            <div class="price-box">
+
+                                <span class="old-price">
+                                    ₹<%= Math.round(
+                                        listing.price /
+                                        (1 - [30, 25, 20][index] / 100)
+                                    ).toLocaleString("en-IN") %>
+                                </span>
+
+                                <span class="new-price">
+                                    ₹<%= listing.price.toLocaleString("en-IN") %>
+                                    / night
+                                </span>
+
+                            </div>
+
+                            <!-- LOCATION -->
+                            <p class="text-muted mt-2">
+                                📍 <%= listing.location %>,
+                                <%= listing.country %>
+                            </p>
+
+                            <!-- SHOW LISTING -->
+                            <a
+                                href="/listings/<%= listing._id %>"
+                                class="deal-btn"
+                            >
+                                View Stay
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        <% } else { %>
+
+            <div class="col-12">
+                <p class="text-muted">
+                    No deals available right now.
+                </p>
+            </div>
+
+        <% } %>
+
+    </div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- CATEGORIES -->
+<!-- ================================================= -->
+
+<section class="home-section">
+
+    <h2>Explore by category</h2>
+
+    <p class="section-subtitle">
+        Find a stay that matches your mood
+    </p>
+
+    <div class="row g-3">
+
+        <div class="col-lg-2 col-md-4 col-6">
+            <a href="/listings/Trending" class="category-box">
+                <i class="fa-solid fa-fire"></i>
+                <h5>Trending</h5>
+            </a>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+            <a href="/listings/Rooms" class="category-box">
+                <i class="fa-solid fa-bed"></i>
+                <h5>Rooms</h5>
+            </a>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+            <a href="/listings/Mountains" class="category-box">
+                <i class="fa-solid fa-mountain"></i>
+                <h5>Mountains</h5>
+            </a>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+            <a href="/listings/Castles" class="category-box">
+                <i class="fa-solid fa-chess-rook"></i>
+                <h5>Castles</h5>
+            </a>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+            <a href="/listings/Camping" class="category-box">
+                <i class="fa-solid fa-campground"></i>
+                <h5>Camping</h5>
+            </a>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+            <a href="/listings/Boats" class="category-box">
+                <i class="fa-solid fa-sailboat"></i>
+                <h5>Boats</h5>
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- BIG OFFER -->
+<!-- ================================================= -->
+
+<section class="big-offer">
+
+    <div class="big-offer-content">
+
+        <h2>Get 20% OFF your first trip!</h2>
+
+        <p>
+            Start your Wanderlust journey today and discover
+            incredible places at special prices.
+        </p>
+
+        <a href="/listings" class="offer-btn">
+            Explore Listings
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- FOOTER -->
+<!-- ================================================= -->
+
+<footer class="home-footer">
+
+    <div class="row">
+
+        <div class="col-lg-4 mb-4">
+
+            <h3 class="footer-title">
+                <i class="fa-solid fa-compass"></i>
+                Wanderlust
+            </h3>
+
+            <p class="text-muted">
+                Discover unique stays and beautiful destinations
+                around the world.
+            </p>
+
+        </div>
+
+
+        <div class="col-lg-2 col-md-4 mb-4">
+
+            <h5 class="footer-title">
+                Explore
+            </h5>
+
+            <a href="/">Home</a>
+            <a href="/listings">All Listings</a>
+            <a href="/listings/Trending">Trending</a>
+            <a href="/listings/Mountains">Mountains</a>
+
+        </div>
+
+
+        <div class="col-lg-2 col-md-4 mb-4">
+
+            <h5 class="footer-title">
+                Categories
+            </h5>
+
+            <a href="/listings/Rooms">Rooms</a>
+            <a href="/listings/Castles">Castles</a>
+            <a href="/listings/Camping">Camping</a>
+            <a href="/listings/Boats">Boats</a>
+
+        </div>
+
+
+        <div class="col-lg-2 col-md-4 mb-4">
+
+            <h5 class="footer-title">
+                Account
+            </h5>
+
+            <a href="/login">Login</a>
+            <a href="/signup">Sign Up</a>
+            <a href="/listings/new">Add Listing</a>
+
+        </div>
+
+
+        <div class="col-lg-2 mb-4">
+
+            <h5 class="footer-title">
+                Follow Us
+            </h5>
+
+            <div class="d-flex gap-3">
+
+                <a href="#">
+                    <i class="fa-brands fa-instagram fa-lg"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-facebook fa-lg"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-linkedin fa-lg"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Wanderlust · Privacy · Terms · Sitemap
+
+    </div>
+
+</footer>
+```

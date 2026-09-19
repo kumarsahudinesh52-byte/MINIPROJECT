@@ -49,6 +49,23 @@ const listeningSchema = new Schema({
             required: true
         }
     },
+    category: {
+    type: String,
+    enum: [
+        "Trending",
+        "Rooms",
+        "Iconic City",
+        "Mountains",
+        "Castles",
+        "Amazing Pools",
+        "Camping",
+        "Farms",
+        "Arctic",
+        "Dooms",
+        "Boats",
+        
+       ]
+     },
 });
 
 

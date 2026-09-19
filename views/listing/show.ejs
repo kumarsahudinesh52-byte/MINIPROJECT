@@ -19,7 +19,8 @@
         </div>
     </div>
     <!--You also need to check Curruser is define or not also-->
-    <%  if( Curruser && Curruser._id.equals(listing.owner._id))   { %>
+    <!-- Make the Dinu == the main owner access all the listings -->
+    <%  if( Curruser && (Curruser._id.equals(listing.owner._id) || Curruser._id.equals('6a8c2ec9d7530e437570800f')))   { %>
     <div class="btns">
         <a href="/listings/<%= listing._id %>/edit" class="btn btn-danger  offset-3">Edit</a>
         

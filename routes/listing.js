@@ -40,6 +40,21 @@ router.route("/") //this is the common path for all req
 //     );
 
 
+//For go to home page --> No login and all needed
+router.get("/home", warpAsync(async (req, res) => {
+    const allListings = await Listing.find({});
+    
+    res.render("listing/home", { allListings });
+}));
+
+
+
+
+
+
+
+
+
 // -->req.isAuthenticated() works for requests coming from Hoppscotch, Postman, browser, etc
 
 //New Route
@@ -60,12 +75,61 @@ router.get("/new",isLoggedIn,(req,res) => {
     res.render("listing/new.ejs");
 })
 
+//Search
+router.get("/search", async (req, res) => {
+    const { q } = req.query;
+
+    const allListings = await Listing.find({
+        $or: [
+            { title: { $regex: q, $options: "i" } },
+            { location: { $regex: q, $options: "i" } },
+            { country: { $regex: q, $options: "i" } }
+        ]
+    });
+
+
+    console.log("FOUND LISTINGS:", allListings.length);
+    console.log(allListings);
+
+    res.render("listing/search", { allListings , q });
+});
+
+
+//As per category
+
+router.get("/Trending", isLoggedIn, warpAsync(listingController.Trending));
+
+router.get("/Rooms", isLoggedIn, warpAsync(listingController.Rooms));
+
+router.get("/IconicCity", isLoggedIn, warpAsync(listingController.IconicCity));
+
+router.get("/Mountains", isLoggedIn, warpAsync(listingController.Mountains));
+
+router.get("/Castles", isLoggedIn, warpAsync(listingController.Castles));
+
+router.get("/AmazingPools", isLoggedIn, warpAsync(listingController.AmazingPools));
+
+router.get("/Camping", isLoggedIn, warpAsync(listingController.Camping));
+
+router.get("/Farms", isLoggedIn, warpAsync(listingController.Farms));
+
+router.get("/Arctic", isLoggedIn, warpAsync(listingController.Arctic));
+
+router.get("/Dooms", isLoggedIn, warpAsync(listingController.Dooms));
+
+router.get("/Boats", isLoggedIn, warpAsync(listingController.Boats));
+
+
+
 //As new route need to be in front otherwise mongoose treate /new as /:id route
 
 router.route("/:id")
       .post(isLoggedIn,isOwner,upload.single("listing[image]"),validateListing, warpAsync(listingController.update))
       .delete( isLoggedIn,isOwner, warpAsync(listingController.delete))
       .get( warpAsync(listingController.show));
+
+
+
 
 
 
@@ -99,6 +163,12 @@ router.route("/:id")
 //Edit route
 //Shift to controller
 router.get("/:id/edit",isLoggedIn,isOwner,  warpAsync(listingController.edit))
+
+
+
+
+
+
 
 
 

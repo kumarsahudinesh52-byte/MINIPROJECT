@@ -25,7 +25,7 @@ const initDB = async () => {
     data.data = data.data.map((obj) => ({
         ...obj,
         //i make the Dinu name owner of all existing listing
-        owner : "6a8c2ec9d7530e437570800f",
+        owner : "6aae56207b3d5f9dd87dd9b0",
     }))
     await Listing.insertMany(data.data)
     console.log("Data was initialized")

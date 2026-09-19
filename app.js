@@ -105,13 +105,15 @@ app.use((req,res,next) => {
 
 
 //Now we not need the home route otherwise anyone get to this route 
-app.get("/", (req,res) => {
-    res.redirect("/listings");
+app.get("/",  async (req,res) => {
+    console.log("HOME ROUTE HIT");
+    const allListings = await Listing.find({});
+    res.render("listing/home" , { allListings });
 })
 
 const ExpressError = require("./util/ExpressError.js")
 
-//const MONGO_URl = "mongodb://127.0.0.1:27017/wanderlust";
+const MONGO_URl = "mongodb://127.0.0.1:27017/wanderlust";
 
 
 app.set("view engine", "ejs");
@@ -130,7 +132,7 @@ main()
 })
 
 async function main() {
-    await mongoose.connect(dburl);
+    await mongoose.connect(MONGO_URl);
 }
 
 

@@ -1,0 +1,162 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+#filters {
+  display : flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter {
+  text-align: center;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  opacity: 0.7;
+}
+
+.filter:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.filter p {
+  font-size: 0.8rem;
+}
+
+/* #tax-info {
+  display: none;
+} */
+
+/* .tax-toggle {
+  border: 1px solid black;
+  border-radius: 1rem;
+  height: 3.5rem;
+  padding: 1rem;
+  margin-left: 5rem;
+  text-align: center;
+} */
+
+.category-header {
+    width: 100%;
+    margin: 2rem 0;
+    padding: 1.2rem 1.5rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+     background: #fff1f0;
+    border: 1px solid #e5e5e5;
+    border-radius: 18px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+.category-title h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.category-title p {
+    margin: 0.3rem 0 0;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+/* Tax section */
+.tax-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+
+    padding: 0.7rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    background: #5109ae;
+}
+
+.tax-label {
+    font-size: 0.9rem;
+    color: #ffff;
+    white-space: nowrap;
+}
+
+.form-check {
+    margin: 0;
+}
+
+.form-check-input {
+    cursor: pointer;
+    width: 2.8rem !important;
+    height: 1.5rem;
+}
+
+.form-check-input:checked {
+    background-color: #fe4240;
+    border-color: #fe4240;
+}
+</style>
+    <!-- <h1>All Listing</h1> -->
+    <!--As navbar came no need this-->
+    <!-- <form method="get" action="/listings/new">
+        <button>Add new Listing</button>
+    </form> -->
+    <div class="category-header">
+    <div class="category-title">
+        <h3><%= category %> Category Listings</h3>
+        <p>Explore stays in this category</p>
+    </div>
+
+    <div class="tax-toggle">
+        <span class="tax-label">Display total after taxes</span>
+
+        <div class="form-check form-switch">
+            <input 
+                class="form-check-input" 
+                type="checkbox" 
+                role="switch" 
+                id="switchCheckDefault"
+            >
+        </div>
+    </div>
+</div>
+
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">  
+  <% for(listing of allListings) { %>
+  <a href="/listings/<%= listing._id %>" class="listing-link">
+  <div class="card cols listing-card" style="width: 20rem;">
+  <div class="card text-bg-dark">
+  <img src="<%= listing.image.url %>" class="card-img-top" alt="listing-image" style="height:20rem;" >
+  <div class="card-img-overlay">
+    <h5 class="card-title">View</h5>
+    <p class="card-text"></p>
+  </div>
+</div>
+  <div class="card-body">
+    <h4 class="card-title"> <%= listing.title %></h4>
+    <p class="card-text">
+        &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+        <i class="tax-info">&nbsp; &nbsp;+18% GST</i>
+    </p>
+    </div>
+  </div>
+  </a>
+   <%  } %>
+</div>
+
+<script>
+  let taxSwitch = document.getElementById("switchCheckDefault");
+  let taxInfo = document.getElementsByClassName("tax-info");
+  taxSwitch.addEventListener("click", () => {
+    for(info of taxInfo){
+      if(info.style.display != "inline"){
+        info.style.display = "inline";
+      }
+      else{
+        info.style.display = "none";
+      }
+    }
+  });
+</script>
+
+
