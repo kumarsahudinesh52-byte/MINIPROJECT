@@ -132,7 +132,7 @@ main()
 })
 
 async function main() {
-    await mongoose.connect(MONGO_URl);
+    await mongoose.connect(dburl);
 }
 
 
