@@ -9,6 +9,10 @@ cloudinary.config({
     api_secret : process.env.CLOUD_API_SECRET,
 });
 
+console.log("Cloud name:", process.env.CLOUD_NAME);
+console.log("Cloud API key exists:", !!process.env.CLOUD_API_KEY);
+console.log("Cloud API secret exists:", !!process.env.CLOUD_API_SECRET);
+
 const storage = new CloudinaryStorage({
     cloudinary : cloudinary,
     params : {
